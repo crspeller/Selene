@@ -49,12 +49,12 @@ bool test_pass_function_to_lua(sel::State &state) {
 
 bool test_call_returned_lua_function(sel::State &state) {
     state.Load("../test/test_ref.lua");
-    sel::function<int(int, int)> lua_add = state["add"];
+    auto lua_add = state["add"];
     return lua_add(2, 4) == 6;
 }
 
 bool test_call_multivalue_lua_function(sel::State &state) {
     state.Load("../test/test_ref.lua");
-    sel::function<std::tuple<int, int>()> lua_add = state["return_two"];
+    auto lua_add = state["return_two"];
     return lua_add() == std::make_tuple(1, 2);
 }

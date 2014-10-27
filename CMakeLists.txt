@@ -23,5 +23,5 @@ include_directories(include)
 file(GLOB headers RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
   include/*.h include/selene/*.h)
 
-add_executable(test_runner ${CMAKE_CURRENT_SOURCE_DIR}/test/Test.cpp)
+add_executable(test_runner ${CMAKE_CURRENT_SOURCE_DIR}/test/Test.cpp ${headers})
 target_link_libraries(test_runner lua)

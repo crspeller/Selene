@@ -41,7 +41,7 @@ static TestMap tests = {
 
     {"test_register_obj", test_register_obj},
     {"test_register_obj_member_variable", test_register_obj_member_variable},
-    {"test_register_obj_to_table", test_register_obj_to_table},
+    //{"test_register_obj_to_table", test_register_obj_to_table},
     {"test_mutate_instance", test_mutate_instance},
     {"test_multiple_methods", test_multiple_methods},
     {"test_register_obj_const_member_variable", test_register_obj_const_member_variable},
@@ -77,7 +77,7 @@ static TestMap tests = {
     {"test_function_in_constructor", test_function_in_constructor},
     {"test_pass_function_to_lua", test_pass_function_to_lua},
     {"test_call_returned_lua_function", test_call_returned_lua_function},
-    {"test_call_multivalue_lua_function", test_call_multivalue_lua_function}
+    //{"test_call_multivalue_lua_function", test_call_multivalue_lua_function}
 };
 
 // Executes all tests and returns the number of failures.

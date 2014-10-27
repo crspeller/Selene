@@ -34,8 +34,8 @@ private:
 
     Selector(lua_State *s, Registry &r, const std::string &name,
              std::vector<Fun> traversal, Fun get, PFun put)
-        : _state(s), _registry(r), _name(name), _traversal{traversal},
-          _get(get), _put(put), _functor{nullptr} {}
+        : _state(s), _registry(r), _name(name), _traversal(traversal),
+          _get(get), _put(put), _functor(nullptr) {}
 
     Selector(lua_State *s, Registry &r, const char *name)
         : _state(s), _registry(r), _name(name), _functor{nullptr} {
@@ -72,10 +72,10 @@ public:
     Selector(const Selector &other)
         : _state(other._state),
           _registry(other._registry),
-          _name{other._name},
-        _traversal{other._traversal},
-        _get{other._get},
-        _put{other._put} {}
+          _name(other._name),
+        _traversal(other._traversal),
+        _get(other._get),
+        _put(other._put) {}
 
     ~Selector() {
         // If there is a functor present, execute it and collect no args
@@ -318,7 +318,7 @@ public:
 
     // Chaining operators. If the selector is an rvalue, modify in
     // place. Otherwise, create a new Selector and return it.
-    Selector&& operator[](const char *name) && {
+    Selector&& operator[](const char *name) {
         _name += std::string(".") + name;
         _check_create_table();
         _traversal.push_back(_get);
@@ -332,7 +332,7 @@ public:
         };
         return std::move(*this);
     }
-    Selector&& operator[](const int index) && {
+    Selector&& operator[](const int index) {
         _name += std::string(".") + std::to_string(index);
         _check_create_table();
         _traversal.push_back(_get);
@@ -348,7 +348,7 @@ public:
         };
         return std::move(*this);
     }
-    Selector operator[](const char *name) const & {
+    Selector operator[](const char *name) const  {
         auto n = _name + "." + name;
         _check_create_table();
         auto traversal = _traversal;
@@ -363,7 +363,7 @@ public:
         };
         return Selector{_state, _registry, n, traversal, get, put};
     }
-    Selector operator[](const int index) const & {
+    Selector operator[](const int index) const  {
         auto name = _name + "." + std::to_string(index);
         _check_create_table();
         auto traversal = _traversal;
